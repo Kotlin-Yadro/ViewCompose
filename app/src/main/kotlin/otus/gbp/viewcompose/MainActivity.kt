@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
             toViews.setOnClickListener {
                 startActivity(ViewsActivity.buildIntent(this@MainActivity))
             }
+            toCompose.setOnClickListener {
+                startActivity(ComposeActivity.buildIntent(this@MainActivity))
+            }
         }
     }
 }

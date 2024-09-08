@@ -5,4 +5,6 @@
 
     <string name="like">Like</string>
     <string name="dislike">Dislike</string>
+
+    <string name="title_activity_compose">ComposeActivity</string>
 </resources>
