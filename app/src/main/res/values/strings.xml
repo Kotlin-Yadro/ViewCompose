@@ -2,4 +2,7 @@
     <string name="app_name">ViewCompose</string>
     <string name="btn_views">Views</string>
     <string name="btn_compose">Compose</string>
+
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
 </resources>
