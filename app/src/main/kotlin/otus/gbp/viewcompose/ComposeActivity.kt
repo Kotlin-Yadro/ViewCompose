@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +19,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import otus.gbp.viewcompose.components.LikeDislikeCompose
 
 class ComposeActivity : ComponentActivity() {
@@ -29,38 +29,42 @@ class ComposeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                var likes by rememberSaveable {
-                    mutableIntStateOf(0)
-                }
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceAround
-                ) {
-                    LikeDislikeCompose(
-                        likes,
-                        onDislike = { --likes },
-                        onLike = { ++likes }
-                    )
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Button(onClick = { --likes }) {
-                            Text(getString(R.string.dislike))
+        setContentView(
+            ComposeView(this).apply {
+                setContent {
+                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                        var likes by rememberSaveable {
+                            mutableIntStateOf(0)
                         }
-                        Button(onClick = { ++likes }) {
-                            Text(getString(R.string.like))
+
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceAround
+                        ) {
+                            LikeDislikeCompose(
+                                likes,
+                                onDislike = { --likes },
+                                onLike = { ++likes }
+                            )
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceAround
+                            ) {
+                                Button(onClick = { --likes }) {
+                                    Text(getString(R.string.dislike))
+                                }
+                                Button(onClick = { ++likes }) {
+                                    Text(getString(R.string.like))
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
+        )
     }
 }
